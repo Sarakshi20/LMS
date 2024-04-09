@@ -1,9 +1,7 @@
 const express = require('express');
+const loginUser = require('../controller/loginUser');
 const routes = express.Router();
 
-routes.get('/profile',(req,res)=>{
-    res.send("<h1>profile</h1>")
-});
-
+routes.post('/',loginUser);
 
 module.exports = routes;

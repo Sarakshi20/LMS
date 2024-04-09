@@ -9,8 +9,8 @@ const courseContentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    content: {
-       video : String
+    videoLink: {
+       type: String
     }
 },{
     timestamps: true
