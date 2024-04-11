@@ -5,11 +5,18 @@ async function createCourse(req,res){
         let courseData = {
             name: req.body.name,
             desc : req.body.desc,
-            imageUrl: req.body.url,
+            imageUrl: req.body.imageUrl,
             author: req.body.author,
             duration : req.body.duration,
-            content: req.body.content // an array must be returned here 
+            content: req.body.content.map((item) => {
+                return {
+                    title : item.title,
+                    desc: item.desc,
+                    videoLink: item.videoLink
+                };
+            }) // an array is being returned here 
         }
+
 
         let course = await Course.create(courseData);
         if(course === null){

@@ -1,6 +1,7 @@
 const express = require('express');
+const router = express.Router();
 const createCourse = require('../controller/courseCreation');
-const checkAdmin = require('../middlewares/checkAdmin');
-const  router = express.Router();
 
-router.post('/',checkAdmin,createCourse);
+router.post('/',createCourse);
+
+module.exports = router;

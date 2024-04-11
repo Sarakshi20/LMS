@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
         lowercase: true
     },
     isEmailVerified: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     password: {
         type: String,
@@ -24,6 +25,7 @@ const userSchema = new mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
+        default: false
     }
 },{
     timestamps: true

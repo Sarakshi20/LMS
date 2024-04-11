@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require( '../models/user.model' );
+const {setUser} = require('../service/auth');
+const enrollCourse = require('../models/userCourses.model');
 
 async function registerUser( req, res ) {
     try{
@@ -11,12 +13,13 @@ async function registerUser( req, res ) {
             password: hashedPassword
         };
         const checkEmail = await User.findOne( {'email': userData.email} ) === null ? true : false;
-        if (!checkEmail) return res.status(200).send(false);
+        if (!checkEmail) return res.status(200).json({message: "email already exists"});
         const newUser = await User.create(userData);
-        const token = setUser(newUser);
+        await enrollCourse.create({userId: newUser.id});
+        const token = await setUser(newUser);
         return res.status(200).send(token);
-    }catch{
-        res.status(500).send();
+    }catch(err){
+        res.status(500).send(err);
     }
 };
 
